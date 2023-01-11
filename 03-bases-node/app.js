@@ -4,7 +4,7 @@ const argv = require('./config/yargs')
 //imprimir la tabla del 5
 console.clear();
 
-console.log(argv);
+// console.log(argv);
 
 
 
