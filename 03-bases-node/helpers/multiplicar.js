@@ -1,24 +1,25 @@
 const fs = require('fs');
-const { argv } = require('yargs');
-const crearArchivo = async(base = 5) =>{
+const colors = require('colors');
+const crearArchivo = async(base = 5,listar = false , hasta = 10) =>{
 
     try {
         
 
         let salida = "";
-
-        for (let index = 1; index <= 10; index++) {
-            salida += `${base}x${index} = ${base*index}\n`
+        let consola = '';
+        for (let index = 1; index <= hasta; index++) {
+            salida += `${base} x ${index} = ${base*index}\n`
+            consola += `${base} ${'x'.yellow} ${index} ${'='.cyan} ${base*index}\n`
         }
-        if(argv.l){
-            console.log("===============");
-            console.log(`Tabla del ${base}:`);
-            console.log("===============");
+        if(listar){
+            console.log("===============".rainbow);
+            console.log(`Tabla del ${base}:`.green);
+            console.log(colors.rainbow("==============="));
 
-            console.log(salida);
+            console.log(consola);
         }
 
-        fs.writeFileSync(`tabla-${base}.txt`,salida);
+        fs.writeFileSync(`./salida/tabla-${base}.txt`,salida);
         return `tabla-${base}.txt fue creado`;
     } catch (err) {
         throw err
