@@ -1,17 +1,16 @@
 const fs = require('fs');
 const colors = require('colors');
-const { argv } = require('yargs');
-const crearArchivo = async(base = 5) =>{
+const crearArchivo = async(base = 5,listar = false , hasta = 10) =>{
 
     try {
         
 
         let salida = "";
 
-        for (let index = 1; index <= 10; index++) {
+        for (let index = 1; index <= hasta; index++) {
             salida += `${base} ${'x'.yellow} ${index} ${'='.cyan} ${base*index}\n`
         }
-        if(argv.l){
+        if(listar){
             console.log("===============".rainbow);
             console.log(`Tabla del ${base}:`.green);
             console.log(colors.rainbow("==============="));
