@@ -21,7 +21,7 @@ const main = async () => {
                 tareas.crearTarea(desc);
                 break
             case '2':
-                console.log(tareas._listado)
+                console.log(tareas.listadoArray)
                 break
             case '3':
                 //Crear opcion
