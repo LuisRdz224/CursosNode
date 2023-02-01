@@ -38,6 +38,27 @@ class Tareas{
         //1. Cafe :: Completada | Pendiente
         //2. Curso :: Completado | Pendiente
     }
+
+    listarPendientesCompletadas (completadas = true){
+        console.log();
+        let index=0;
+        this.listadoArray.forEach((tarea) =>{
+            const {desc, completadoEn} = tarea;
+            const estado = (completadoEn)?"Completado".green:"Pendiente".red
+            if(estado === "Completado".green && completadas)
+                {
+                    index++;
+                    console.log(`${(index.toString()+ '.').green} ${desc} :: Completado el: ${completadoEn}`);
+                }
+            if(estado === "Pendiente".red && !completadas)
+                {
+                    index++;
+                    console.log(`${(index.toString()+ '.').green} ${desc} :: ${estado}`);
+                }
+        })
+
+
+    }
 }
 
 module.exports = Tareas;
