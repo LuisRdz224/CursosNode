@@ -1,7 +1,7 @@
 require('colors');
 
 const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
-const { inquirerMenu, pausa, leerInput, listadoTareasBorrar } = require('./helpers/inquirer')
+const { inquirerMenu, pausa, leerInput, listadoTareasBorrar, confirmar } = require('./helpers/inquirer')
 // const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
 // const { mostrarMenu, pausa } = require('./helpers/mensajes');
@@ -38,11 +38,17 @@ const main = async () => {
                 break
             case '6':
                 const id = await listadoTareasBorrar(tareas.listadoArray);
-                console.log({id});
+                if(id !== '0' ){
+                    const ok = await confirmar('Esta seguro?')
+                    if(ok){
+                        tareas.borrarTarea(id);
+                        console.log('Tarea eliminada');
+                    }
+                }
                 break
 
         }
-        // guardarDB(tareas.listadoArray);
+        guardarDB(tareas.listadoArray);
         await pausa()
     } while (opt !== '0')
 }

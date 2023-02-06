@@ -50,16 +50,14 @@ class Tareas{
         this.listadoArray.forEach((tarea) =>{
             const {desc, completadoEn} = tarea;
             const estado = (completadoEn)?"Completado".green:"Pendiente".red
-            if(estado === "Completado".green && completadas)
-                {
+            if(estado === "Completado".green && completadas){
                     index++;
                     console.log(`${(index.toString()+ '.').green} ${desc} :: Completado el: ${completadoEn}`);
-                }
-            if(estado === "Pendiente".red && !completadas)
-                {
+            }
+            if(estado === "Pendiente".red && !completadas){
                     index++;
                     console.log(`${(index.toString()+ '.').green} ${desc} :: ${estado}`);
-                }
+            }
         })
 
 
