@@ -7,12 +7,10 @@ const main = async() =>{
 
     do {
         opt = await inquirerMenu();
-        console.log(opt);
         switch (opt) {
             case 1:
                 //Mostrar mensaje
                 const lugar = await leerInput('Ciudad: ');
-                console.log(lugar);
 
                 //Buscar los lugares
 
@@ -21,8 +19,7 @@ const main = async() =>{
                 // Clima
 
                 // Mostrar resultados
-                // const ciudades = await busquedas.ciudad();
-                // console.log(ciudades);
+                await busquedas.ciudad(lugar);
 
                 console.log('\n Informacion de la ciudad\n'.green);
                 console.log('Ciudad:',);
