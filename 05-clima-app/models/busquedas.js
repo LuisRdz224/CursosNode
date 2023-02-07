@@ -7,6 +7,18 @@ class Busquedas{
 
     constructor(){
         // TODO leer DB si existe
+        this.leerDB();
+    }
+
+    get historialCapitalizado() {
+
+        return this.historial.map(lugar =>{
+            let palabras = lugar.split(' ')
+            for(let i = 0; i<palabras.length;i++){
+                palabras[i] = palabras[i][0].toUpperCase() + palabras[i].slice(1);
+            }
+            return palabras.join(' ');
+        })
     }
 
     get paramsMapbox(){
@@ -90,7 +102,15 @@ class Busquedas{
     }
 
     leerDB(){
+        //Debe de existir
+        if(!fs.existsSync(this.dbPath))
+            return null;
+        const info = fs.readFileSync( this.dbPath, { encoding: 'utf-8'} );
+        const data = JSON.parse(info);
 
+
+        this.historial = data.historial;
+        // return this.historial;
     }
 }
 

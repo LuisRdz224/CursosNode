@@ -6,6 +6,10 @@ const { Busquedas } = require("./models/busquedas");
 const main = async() =>{
     const busquedas = new Busquedas();
     let opt = '';
+    const historialDB = busquedas.leerDB();
+    if(historialDB){
+        busquedas.agregarHistorial(historialDB);
+    }
 
     do {
         opt = await inquirerMenu();
@@ -39,7 +43,7 @@ const main = async() =>{
                 console.log('Como esta el clima:',clima.desc.green);
                 break;
             case 2:
-                busquedas.historial.forEach( (lugar, i) =>{
+                busquedas.historialCapitalizado.forEach( (lugar, i) =>{
                     const idx = `${ i + 1 }`.green;
                     console.log(`${idx} ${lugar}`);
                 })
