@@ -7,7 +7,6 @@ class Server{
         this.port = process.env.PORT
         this.usuariosPath = '/api/usuarios';
 
-
         //Middlewares
         this.middlewares();
 
@@ -18,9 +17,16 @@ class Server{
 
 
     middlewares(){
-        //Directorio publico
-        this.app.use(express.static('public'))
+
+        //CORS
         this.app.use(cors());
+
+        //lectura y Parseo del body
+        this.app.use(express.json());
+
+        //Directorio publico
+        this.app.use(express.static('public'));
+
     }
 
     routes(){
