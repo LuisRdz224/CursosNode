@@ -30,12 +30,20 @@ const usuariosPost = async (req, res) => {
     })
     console.log('El usuario fue creado exitosamente')
 }
-const usuariosPut = (req, res) => {
+const usuariosPut = async (req, res) => {
     const id = req.params.id
+    const { password, correo, google, ...resto } = req.body
+
+    if (password) {
+        const salt = bcrypt.genSaltSync()
+        resto.password = bcrypt.hashSync(password, salt)
+    }
+
+    const usuario = await Usuario.findByIdAndUpdate(id, resto)
 
     res.status(400).json({
         msg: 'put API - Controlador',
-        id
+        usuario
     })
 }
 const usuariosDelete = async (req, res, next) => {
