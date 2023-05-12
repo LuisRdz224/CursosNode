@@ -32,7 +32,7 @@ const usuariosPost = async (req, res) => {
 }
 const usuariosPut = async (req, res) => {
     const id = req.params.id
-    const { password, correo, google, ...resto } = req.body
+    const { _id, password, correo, google, ...resto } = req.body
 
     if (password) {
         const salt = bcrypt.genSaltSync()

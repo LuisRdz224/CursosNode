@@ -14,8 +14,16 @@ const validaMail = async (correo = '') => {
         throw new Error(`El correo ${correo} ya se encuentra registrado`)
     }
 }
+const validaID = async (_id = '') => {
+    //Verificar si el correo existe
+    const existeID = await Usuario.findById({ _id })
+    if (!existeID) {
+        throw new Error(`El ID ${_id} no existe`)
+    }
+}
 
 module.exports = {
     esRol,
-    validaMail
+    validaMail,
+    validaID
 }
