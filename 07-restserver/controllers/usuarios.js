@@ -24,6 +24,7 @@ const usuariosGet = async (req = request, res = response) => {
     })
 }
 
+//test
 const usuariosPost = async (req, res) => {
     const { nombre, correo, password, rol } = req.body
     const usuario = new Usuario({ nombre, correo, password, rol })
