@@ -4,20 +4,20 @@ const Usuario = require('../models/usuario')
 
 const mongoose = require('mongoose')
 
-const usuariosGet = (req = request, res = response) => {
+const usuariosGet = async (req = request, res = response) => {
     const { q, nombre = 'no name', apiKey, page = 1 } = req.query
+    const { limite = 4, desde = 0 } = req.query
+    const usuarios = await Usuario.find()
+        .limit(Number(limite))
+        .skip(Number(desde))
     res.json({
-        msg: 'get API - Controlador',
-        q,
-        nombre,
-        apiKey
+        usuarios
     })
 }
 
 const usuariosPost = async (req, res) => {
     const { nombre, correo, password, rol } = req.body
     const usuario = new Usuario({ nombre, correo, password, rol })
-
 
     //Encriptar la contrase;a
     const salt = bcrypt.genSaltSync()
@@ -42,7 +42,6 @@ const usuariosPut = async (req, res) => {
     const usuario = await Usuario.findByIdAndUpdate(id, resto)
 
     res.status(400).json({
-        msg: 'put API - Controlador',
         usuario
     })
 }
