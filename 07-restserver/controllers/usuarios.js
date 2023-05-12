@@ -5,12 +5,21 @@ const Usuario = require('../models/usuario')
 const mongoose = require('mongoose')
 
 const usuariosGet = async (req = request, res = response) => {
-    const { q, nombre = 'no name', apiKey, page = 1 } = req.query
-    const { limite = 4, desde = 0 } = req.query
-    const usuarios = await Usuario.find()
-        .limit(Number(limite))
-        .skip(Number(desde))
+    const { limite = 5, desde = 0 } = req.query
+    const query = { estado: true }
+
+    // const usuarios = await Usuario.find(query)
+    //     .limit(Number(limite))
+    //     .skip(Number(desde))
+
+    // const total = await Usuario.countDocuments(query)
+
+    const [total, usuarios] = await Promise.all([
+        Usuario.countDocuments(query),
+        Usuario.find(query).limit(Number(limite)).skip(Number(desde))
+    ])
     res.json({
+        total,
         usuarios
     })
 }
