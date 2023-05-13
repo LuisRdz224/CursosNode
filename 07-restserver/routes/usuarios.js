@@ -35,7 +35,15 @@ router.post(
     usuariosPost
 )
 
-router.delete('/:id', usuariosDelete)
+router.delete(
+    '/:id',
+    [
+        check('id', 'Ingresa un MongoID Valido').isMongoId(),
+        check('id').custom(validaID),
+        realizaValidacion
+    ],
+    usuariosDelete
+)
 
 router.patch('/',usuariosPatch );
 
