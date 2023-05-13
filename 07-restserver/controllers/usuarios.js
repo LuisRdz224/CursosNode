@@ -55,36 +55,16 @@ const usuariosPut = async (req, res) => {
         usuario
     })
 }
-const usuariosDelete = async (req, res, next) => {
-    // const userId = req.params.id
-    // console.log(`Usuario: ${userId}`)
-    try {
-        // Obtener el ID del usuario a eliminar de los parámetros de la URL
-        const userId = req.params.id
+const usuariosDelete = async (req, res) => {
+    const { id } = req.params
+    //Borrado fisico
+    // const usuario = await Usuario.findByIdAndDelete(id)
 
-        // Convertir el ID a un objeto ObjectId de MongoDB
-        const objectId = mongoose.Types.ObjectId(userId)
-
-        // Buscar y eliminar el usuario por su ID de MongoDB
-        const deletedUser = await Usuario.findByIdAndDelete(objectId)
-
-        // Si el usuario no existe, lanzar un error 404
-        if (!deletedUser) {
-            throw new ErrorHandler(404, 'Usuario no encontrado')
-        }
-
-        // Enviar una respuesta de éxito al cliente
-        res.status(200).json({
-            success: true,
-            message: `Usuario con ID ${userId} eliminado exitosamente`,
-            data: deletedUser
-        })
-    } catch (err) {
-        const userId = req.params.id
-        console.log(`Ocurrio un error eliminando al usuario ${userId}`)
-        next(err)
-    }
+    //Borrado logico
+    const usuario = await Usuario.findByIdAndUpdate(id, { estado: false })
+    res.json(usuario)
 }
+
 const usuariosPatch = (req, res) => {
     res.json({
         msg: 'patch API - Controlador'
