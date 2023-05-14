@@ -62,7 +62,8 @@ const usuariosDelete = async (req, res) => {
 
     //Borrado logico
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false })
-    res.json(usuario)
+    const usuarioAutenticado = req.uid
+    res.json({ usuario, usuarioAutenticado })
 }
 
 const usuariosPatch = (req, res) => {
