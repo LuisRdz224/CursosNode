@@ -1,10 +1,21 @@
-const { Router } = require('express');
-const { usuariosGet, usuariosPatch, usuariosDelete, usuariosPut, usuariosPost } = require('../controllers/usuarios');
+const { Router } = require('express')
 const { check } = require('express-validator')
-const { realizaValidacion } = require('../middlewares/validar-campos')
+
+const {
+    usuariosGet,
+    usuariosPatch,
+    usuariosDelete,
+    usuariosPut,
+    usuariosPost
+} = require('../controllers/usuarios')
 const { esRol, validaMail, validaID } = require('../helpers/db-validators')
-const { verificaJWT } = require('../middlewares/validar-jwt')
-const { esAdminRole, tieneRol } = require('../middlewares/validar-roles')
+
+const {
+    realizaValidacion,
+    verificaJWT,
+    esAdminRole,
+    tieneRol
+} = require('../middlewares')
 const router = Router()
 
 router.get('/', usuariosGet)
@@ -50,6 +61,6 @@ router.delete(
     usuariosDelete
 )
 
-router.patch('/',usuariosPatch );
+router.patch('/', usuariosPatch)
 
-module.exports = router;
+module.exports = router
