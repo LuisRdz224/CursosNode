@@ -47,6 +47,23 @@ const login = async (req, res = response) => {
     }
 }
 
+
+const googleSignin = (req, res = response) => {
+    const { id_token } = req.body
+
+    if (!id_token) {
+        return res.json({
+            msg: 'No se envio token'
+        })
+    }
+
+    res.json({
+        msg: 'Todo bien',
+        token: id_token
+    })
+}
+
 module.exports = {
-    login
+    login,
+    googleSignin
 }
